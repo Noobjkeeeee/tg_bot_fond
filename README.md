@@ -20,8 +20,8 @@
 
 ### 1. Клонирование репозитория
 ```
-git clone https://github.com/ваш-репозиторий.git
-cd ваш-репозиторий
+git clone https://github.com/Noobjkeeeee/tg_bot_fond.git
+cd tg_bot_fond
 ```
 ### 2. Настройка окружения
 
