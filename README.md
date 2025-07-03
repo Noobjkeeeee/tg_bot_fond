@@ -60,3 +60,5 @@ python main.py
 ├── 📁 handlers/
 │   ├── 👋 welcome.py          # Логика приветствия
 │   └── 🎛️ commands.py         # Обработка команд
+├── 📁 utils/
+│   ├── ⚙️ logger.py           # Логирование ошибок
