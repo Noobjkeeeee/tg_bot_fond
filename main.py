@@ -16,11 +16,8 @@ async def main():
     bot = Bot(token=TOKEN)
     dp = Dispatcher()
 
-
     dp.startup.register(on_startup)
     dp.errors.register(commands.error_handler)
-
-    # Регистрация обработчиков
     dp.message.register(welcome.handle_new_member, F.new_chat_members)
     dp.message.register(commands.start_command, CommandStart())
 

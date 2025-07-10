@@ -8,4 +8,3 @@ ADMIN_ID = os.getenv("ADMIN_ID")
 CHAT_ID = os.getenv("CHAT_ID")
 
 MESSAGE_DELETE_DELAY = 24 * 60 * 60
-
