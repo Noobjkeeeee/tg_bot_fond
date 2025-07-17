@@ -3,7 +3,6 @@ import logging
 import os
 
 from fastapi import FastAPI
-import uvicorn
 
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import CommandStart
@@ -15,7 +14,10 @@ app = FastAPI()
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
-dp.startup.register(lambda _: logging.info("Бот запущен"))
+@dp.startup.register
+async def on_startup(bot: Bot):
+    logging.info("Бот запущен")
+
 dp.errors.register(commands.error_handler)
 dp.message.register(welcome.handle_new_member, F.new_chat_members)
 dp.message.register(commands.start_command, CommandStart())
@@ -24,7 +26,11 @@ dp.message.register(commands.start_command, CommandStart())
 async def root():
     return {"status": "Bot is running"}
 
-async def start_web_and_bot():
+async def main():
+    logging.basicConfig(level=logging.INFO)
+
+    import uvicorn
+
     port = int(os.getenv("PORT", 8000))
     config = uvicorn.Config(app=app, host="0.0.0.0", port=port, log_level="info")
     server = uvicorn.Server(config)
@@ -35,5 +41,4 @@ async def start_web_and_bot():
     await asyncio.gather(polling_task, server_task)
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    asyncio.run(start_web_and_bot())
+    asyncio.run(main())
