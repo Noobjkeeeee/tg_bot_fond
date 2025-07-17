@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import os
 
 from fastapi import FastAPI
 import uvicorn
@@ -24,7 +25,8 @@ async def root():
     return {"status": "Bot is running"}
 
 async def start_web_and_bot():
-    config = uvicorn.Config(app=app, host="0.0.0.0", port=8000, log_level="info")
+    port = int(os.getenv("PORT", 8000))
+    config = uvicorn.Config(app=app, host="0.0.0.0", port=port, log_level="info")
     server = uvicorn.Server(config)
 
     polling_task = asyncio.create_task(dp.start_polling(bot))
